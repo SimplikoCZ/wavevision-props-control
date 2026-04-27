@@ -3,6 +3,7 @@ chrome:=$(shell command -v google-chrome 2>/dev/null)
 codeSnifferRuleset=codesniffer-ruleset.xml
 coverage=$(temp)/coverage
 coverageClover=$(coverage)/coverage.xml
+docker=docker compose run --rm tests
 php=php
 src=src
 temp=temp
@@ -15,44 +16,44 @@ all:
 # Setup
 
 composer:
-	composer install
+	$(docker) composer install
 
 reset:
 	rm -rf $(temp)/cache
-	composer dumpautoload
+	$(docker) composer dumpautoload
 
 di: reset
-	bin/extract-services
+	$(docker) bin/extract-services
 
 fix: reset check-syntax phpcbf phpcs phpstan test
 
 # QA
 
 check-syntax:
-	$(bin)/parallel-lint -e $(php) $(dirs)
+	$(docker) $(bin)/parallel-lint -e $(php) $(dirs)
 
 phpcs:
-	$(bin)/phpcs -sp --standard=$(codeSnifferRuleset) --extensions=php $(dirs)
+	$(docker) $(bin)/phpcs -sp --standard=$(codeSnifferRuleset) --extensions=php $(dirs)
 
 phpcbf:
-	$(bin)/phpcbf -spn --standard=$(codeSnifferRuleset) --extensions=php $(dirs) ; true
+	$(docker) $(bin)/phpcbf -spn --standard=$(codeSnifferRuleset) --extensions=php $(dirs) ; true
 
 phpstan:
-	$(bin)/phpstan analyze $(dirs) --level max
+	$(docker) $(bin)/phpstan analyze $(dirs) --level max
 
 # Tests
 
 test:
-	$(bin)/phpunit
+	$(docker) $(bin)/phpunit
 
 test-coverage: reset
-	$(bin)/phpunit --coverage-html=$(coverage)
+	$(docker) $(bin)/phpunit --coverage-html=$(coverage)
 
 test-coverage-clover: reset
-	$(bin)/phpunit --coverage-clover=$(coverageClover)
+	$(docker) $(bin)/phpunit --coverage-clover=$(coverageClover)
 
 test-coverage-report: test-coverage-clover
-	$(bin)/php-coveralls --coverage_clover=$(coverageClover) --verbose
+	$(docker) $(bin)/php-coveralls --coverage_clover=$(coverageClover) --verbose
 
 test-coverage-open: test-coverage
 ifndef chrome

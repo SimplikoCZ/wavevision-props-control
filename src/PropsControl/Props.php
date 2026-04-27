@@ -31,7 +31,7 @@ abstract class Props
 
 	final protected function schema(): Structure
 	{
-		return Expect::structure($this->define())->castTo(ProcessedProps::class);
+		return Expect::structure($this->define())->transform(fn($values) => new ProcessedProps($values));
 	}
 
 	/**

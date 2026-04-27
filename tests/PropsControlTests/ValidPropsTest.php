@@ -3,14 +3,13 @@
 namespace Wavevision\PropsControlTests;
 
 use Nette\Utils\ArrayHash;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 use Wavevision\PropsControl\Exceptions\NotAllowed;
 use Wavevision\PropsControl\ValidProps;
 use Wavevision\PropsControlTests\Components\TestComponent\TestComponentProps;
 
-/**
- * @covers \Wavevision\PropsControl\ValidProps
- */
+#[CoversClass(ValidProps::class)]
 class ValidPropsTest extends TestCase
 {
 

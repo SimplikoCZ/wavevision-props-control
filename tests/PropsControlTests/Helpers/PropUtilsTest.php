@@ -3,12 +3,11 @@
 namespace Wavevision\PropsControlTests\Helpers;
 
 use Nette\Schema\Expect;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 use Wavevision\PropsControl\Helpers\PropUtils;
 
-/**
- * @covers \Wavevision\PropsControl\Helpers\PropUtils
- */
+#[CoversClass(PropUtils::class)]
 class PropUtilsTest extends TestCase
 {
 

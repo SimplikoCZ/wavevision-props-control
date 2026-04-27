@@ -2,12 +2,11 @@
 
 namespace Wavevision\PropsControlTests\Helpers;
 
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 use Wavevision\PropsControl\Helpers\ClassName;
 
-/**
- * @covers \Wavevision\PropsControl\Helpers\ClassName
- */
+#[CoversClass(ClassName::class)]
 class ClassNameTest extends TestCase
 {
 

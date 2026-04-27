@@ -3,12 +3,12 @@
 namespace Wavevision\PropsControlTests;
 
 use Nette\Schema\ValidationException;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
+use Wavevision\PropsControl\Props;
 use Wavevision\PropsControlTests\Components\TestComponent\TestComponentProps;
 
-/**
- * @covers \Wavevision\PropsControl\Props
- */
+#[CoversClass(Props::class)]
 class PropsTest extends TestCase
 {
 

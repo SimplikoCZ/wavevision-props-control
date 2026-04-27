@@ -2,7 +2,7 @@
 
 namespace Wavevision\PropsControlTests;
 
-use Nette\Configurator;
+use Nette\Bootstrap\Configurator;
 use Nette\DI\Container;
 
 class Environment

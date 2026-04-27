@@ -51,14 +51,9 @@ abstract class PropsControl extends BaseControl
 	{
 		$this->onCreateTemplate(
 			function (Template $template): void {
-				Arrays::toObject(
-					[
-						self::DEFINITION => $this->getProps(),
-						self::CLASS_NAME => $this->createClassName(),
-						self::STYLE => new Style(),
-					],
-					$template
-				);
+				$template->definition = $this->getProps();
+				$template->className = $this->createClassName();
+				$template->style = new Style();
 			}
 		);
 	}

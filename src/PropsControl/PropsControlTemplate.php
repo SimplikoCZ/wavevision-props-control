@@ -2,14 +2,15 @@
 
 namespace Wavevision\PropsControl;
 
+use AllowDynamicProperties;
 use Nette\Application\UI\Presenter;
 use Nette\Bridges\ApplicationLatte\Template;
 use Wavevision\PropsControl\Exceptions\NotAllowed;
 use Wavevision\PropsControl\Helpers\ClassName;
 use Wavevision\PropsControl\Helpers\Style;
-use Wavevision\Utils\Arrays;
 use function property_exists;
 
+#[AllowDynamicProperties]
 class PropsControlTemplate extends Template
 {
 
@@ -51,9 +52,10 @@ class PropsControlTemplate extends Template
 	 */
 	public function setParameters(array $parameters): self
 	{
-		/** @var self $template */
-		$template = Arrays::toObject($parameters, $this);
-		return $template;
+		foreach ($parameters as $name => $value) {
+			$this->$name = $value;
+		}
+		return $this;
 	}
 
 }
